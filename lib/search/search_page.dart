@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:gnps/data/dictionary_data.dart';
 import 'package:gnps/layout/app_header.dart';
 import 'package:gnps/layout/bottom_navigation.dart';
-import 'package:gnps/result_page.dart';
+import 'package:gnps/result/result_page.dart';
 import 'package:gnps/search/pos_badge.dart';
 
 class SearchPage extends StatefulWidget {
