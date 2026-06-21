@@ -31,13 +31,13 @@ class TtsService {
     }
   }
 
-  Future<void> speak(String text) async {
+  Future<void> speak(String text, {String? language}) async {
     if (text.trim().isEmpty) return;
-    await init();
-    await _tts.stop();
-    await _tts.speak(text);
+    await init(language: language);
     try {
-      debugPrint('TTS: speak() called — text length=${text.length}');
+      debugPrint(
+        'TTS: speak() called — text length=${text.length}, language=${language ?? 'default'}',
+      );
       await _tts.stop();
       await _tts.speak(text);
       debugPrint('TTS: speak() dispatched');

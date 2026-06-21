@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gnps/services/tts_service.dart';
 
 class ResultPage extends StatelessWidget {
   final Map<String, dynamic> word;
@@ -391,7 +392,7 @@ class _SynonymChip extends StatelessWidget {
 
 // ── Shared widgets (public so other files can reuse) ─────────────────────────
 
-class ExampleBox extends StatelessWidget {
+class ExampleBox extends StatefulWidget {
   final Map example;
   final ThemeData? theme;
   final ColorScheme? colorScheme;
@@ -404,9 +405,31 @@ class ExampleBox extends StatelessWidget {
   });
 
   @override
+  State<ExampleBox> createState() => _ExampleBoxState();
+}
+
+class _ExampleBoxState extends State<ExampleBox> {
+  bool _isSpeaking = false;
+
+  Future<void> _speakPunjabi(String text) async {
+    setState(() {
+      _isSpeaking = true;
+    });
+    try {
+      await TtsService().speak(text, language: 'pa-IN');
+    } finally {
+      if (mounted) {
+        setState(() {
+          _isSpeaking = false;
+        });
+      }
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final t = theme ?? Theme.of(context);
-    final cs = colorScheme ?? Theme.of(context).colorScheme;
+    final t = widget.theme ?? Theme.of(context);
+    final cs = widget.colorScheme ?? Theme.of(context).colorScheme;
 
     return Container(
       margin: const EdgeInsets.only(bottom: 12),
@@ -424,22 +447,43 @@ class ExampleBox extends StatelessWidget {
               children: [
                 Icon(Icons.format_quote, size: 14, color: cs.primary),
                 const SizedBox(width: 4),
-                Text(
-                  'Punjabi',
-                  style: t.textTheme.labelSmall?.copyWith(
-                    color: cs.primary,
-                    fontWeight: FontWeight.w500,
+                Expanded(
+                  child: Text(
+                    'Punjabi',
+                    style: t.textTheme.labelSmall?.copyWith(
+                      color: cs.primary,
+                      fontWeight: FontWeight.w500,
+                    ),
                   ),
+                ),
+                IconButton(
+                  icon: const Icon(Icons.volume_up, size: 20),
+                  color: cs.primary,
+                  tooltip: 'Speak Punjabi',
+                  onPressed: () {
+                    final punText = widget.example['pun'] as String;
+                    _speakPunjabi(punText);
+                  },
                 ),
               ],
             ),
             const SizedBox(height: 6),
             Text(
-              example['pun'] as String,
+              widget.example['pun'] as String,
               style: t.textTheme.bodyLarge?.copyWith(
                 fontWeight: FontWeight.w500,
               ),
             ),
+            if (_isSpeaking) ...[
+              const SizedBox(height: 6),
+              Text(
+                'Speaking...',
+                style: t.textTheme.bodySmall?.copyWith(
+                  color: cs.primary,
+                  fontStyle: FontStyle.italic,
+                ),
+              ),
+            ],
             const SizedBox(height: 8),
             Divider(height: 1, color: cs.outlineVariant),
             const SizedBox(height: 8),
@@ -457,7 +501,7 @@ class ExampleBox extends StatelessWidget {
             ),
             const SizedBox(height: 4),
             Text(
-              example['eng'] as String,
+              widget.example['eng'] as String,
               style: t.textTheme.bodyMedium?.copyWith(
                 fontStyle: FontStyle.italic,
                 color: cs.onSurfaceVariant,
