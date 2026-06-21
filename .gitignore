@@ -117,3 +117,33 @@ app.*.symbols
 !**/ios/**/default.perspectivev3
 !/packages/flutter_tools/test/data/dart_dependencies_test/**/.packages
 !/dev/ci/**/Gemfile.lock
+
+# Local / common additions
+# macOS/Windows OS artifacts
+.DS_Store
+Thumbs.db
+
+# IDEs/editors
+.vscode/
+.idea/
+
+# Environment / secret files
+.env
+*.env
+service-account*.json
+*.keystore
+*.jks
+google-services.json
+GoogleService-Info.plist
+
+# Node/npm (useful if editing web/ with node tooling)
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# Test coverage / reports
+lcov.info
+test-results/
+
+# Local tool caches
+.firebase/
