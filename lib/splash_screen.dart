@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'home_page.dart';
+import 'search_page.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -17,11 +17,11 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   void _navigateToHome() async {
-    await Future.delayed(const Duration(seconds: 4));
+    await Future.delayed(const Duration(seconds: 3));
     if (!mounted) return;
     Navigator.of(context).pushReplacement(
       MaterialPageRoute(
-        builder: (context) => const HomePage(title: 'GNPS Glenwood'),
+        builder: (context) => const SearchPage(),
       ),
     );
   }
@@ -54,23 +54,23 @@ class _SplashScreenState extends State<SplashScreen> {
               Text(
                 'GNPS',
                 style: Theme.of(context).textTheme.headlineLarge?.copyWith(
-                      color: Colors.indigo,
+                      color: Colors.indigo[900],
                       fontWeight: FontWeight.bold,
                     ),
               ),
               const SizedBox(height: 48),
-              const SizedBox(
+              SizedBox(
                 width: 200,
                 child: LinearProgressIndicator(
-                  color: Colors.indigo,
-                  backgroundColor: Colors.white24,
+                  color: Colors.indigo[900],
+                  backgroundColor: Colors.white,
                 ),
               ),
               const SizedBox(height: 16),
               Text(
                 'Loading...',
                 style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                      color: Colors.black,
+                      color: Colors.indigo[900],
                     ),
               ),
             ],
