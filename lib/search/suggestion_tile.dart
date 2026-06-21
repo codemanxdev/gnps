@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'pos_badge.dart';
+import 'package:gnps/search/pos_badge.dart';
 
 class SuggestionTile extends StatelessWidget {
   final Map<String, dynamic> word;

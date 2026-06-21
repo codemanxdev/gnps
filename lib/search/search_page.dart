@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 
-import '../data/dictionary_data.dart';
-import '../layout/app_header.dart';
-import '../layout/bottom_navigation.dart';
-import '../result_page.dart';
+import 'package:gnps/data/dictionary_data.dart';
+import 'package:gnps/layout/app_header.dart';
+import 'package:gnps/layout/bottom_navigation.dart';
+import 'package:gnps/result_page.dart';
+import 'package:gnps/search/pos_badge.dart';
 
 class SearchPage extends StatefulWidget {
   const SearchPage({super.key});
@@ -32,7 +33,9 @@ class _SearchPageState extends State<SearchPage> {
       if ((w['gurmukhi'] as String).contains(query)) return true;
       if ((w['roman'] as String).toLowerCase().contains(q)) return true;
       final meanings = w['meanings'] as List;
-      if (meanings.any((m) => (m['text'] as String).toLowerCase().contains(q))) {
+      if (meanings.any(
+        (m) => (m['text'] as String).toLowerCase().contains(q),
+      )) {
         return true;
       }
       final synonyms = w['synonyms'] as List;

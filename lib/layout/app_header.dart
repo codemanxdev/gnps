@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../search/suggestion_tile.dart';
+import 'package:gnps/search/suggestion_tile.dart';
 
 class AppHeader extends StatelessWidget {
   final SearchController searchController;

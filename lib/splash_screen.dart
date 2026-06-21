@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'search/search_page.dart';
+import 'package:gnps/search/search_page.dart';
 
 
 class SplashScreen extends StatefulWidget {
